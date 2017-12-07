@@ -3,20 +3,16 @@
 #define echoPin 22
 #define trigPin 23
 
-struct Leg {
-  Servo servo;
-  int deg;
-};
 
 struct Fore {
-  Leg ankle; //つまさき
-  Leg knee; //ひざ
-  Leg joint;//こかんせつ
+  Servo ankle; //つまさき
+  Servo knee; //ひざ
+  Servo joint;//こかんせつ
 };
 
 struct Back {
-  Leg knee;//ひざ
-  Leg joint;//こかんせつ
+  Servo knee;//ひざ
+  Servo joint;//こかんせつ
 };
 
 struct Fore fore_right;
@@ -28,28 +24,17 @@ double Distance = 0;
 
 
 void setup() {
-  fore_right.ankle.servo.attach(3);
-  fore_right.knee.servo.attach(4);
-  fore_right.joint.servo.attach(5);
-  fore_left.ankle.servo.attach(6);
-  fore_left.knee.servo.attach(7);
-  fore_left.joint.servo.attach(8);
-  back_right.knee.servo.attach(9);
-  back_right.joint.servo.attach(10);
-  back_left.knee.servo.attach(11);
-  back_left.joint.servo.attach(12);
-
-  fore_left.ankle.deg = 100;
-  fore_left.knee.deg = 100;
-  fore_left.joint.deg = 100;
-  fore_right.ankle.deg = 100;
-  fore_right.knee.deg = 100;
-  fore_right.joint.deg = 100;
-  back_left.knee.deg = 100;
-  back_left.joint.deg = 100;
-  back_right.knee.deg = 100;
-  back_right.joint.deg = 100;
-
+  fore_right.ankle.attach(3);
+  fore_right.knee.attach(4);
+  fore_right.joint.attach(5);
+  fore_left.ankle.attach(6);
+  fore_left.knee.attach(7);
+  fore_left.joint.attach(8);
+  back_right.knee.attach(9);
+  back_right.joint.attach(10);
+  back_left.knee.attach(11);
+  back_left.joint.attach(12);
+  
   Serial.begin(9600);
   pinMode(echoPin, INPUT);
   pinMode(trigPin, OUTPUT);
@@ -57,22 +42,22 @@ void setup() {
 
 void loop() {
   //初期状態
-  fore_left.ankle = moveServo(fore_left.ankle,100); 
-  fore_left.knee = moveServo(fore_left.knee, 100); 
-  fore_left.joint = moveServo(fore_left.joint, 100);
-  fore_right.ankle = moveServo(fore_right.ankle, 100); //right ankle 150度でまっすぐになる
-  fore_right.knee = moveServo(fore_right.knee, 100); // right knee の初期値として足を下につかせる
-  fore_right.joint = moveServo(fore_right.joint, 100); //right jointの初期値として正面を向かせる
-  back_right.knee = moveServo(back_right.knee, 100);
-  back_right.joint = moveServo(back_right.joint, 100);
-  back_left.knee = moveServo(back_left.knee, 100);
-  back_left.joint = moveServo(back_left.joint, 100);
-  walk();
+  moveServo(fore_left.ankle, 100, 100); 
+  moveServo(fore_left.knee, 100, 100); 
+  moveServo(fore_left.joint, 100, 100);
+  moveServo(fore_right.ankle, 100, 100); //right ankle 150度でまっすぐになる
+  moveServo(fore_right.knee, 100,100); // right knee の初期値として足を下につかせる
+  moveServo(fore_right.joint, 100,100); //right jointの初期値として正面を向かせる
+  moveServo(back_right.knee, 100,100);
+  moveServo(back_right.joint, 100,100);
+  moveServo(back_left.knee, 100,100);
+  moveServo(back_left.joint, 100,100);
+//  walk();
 }
 
 void walk(){
-  fore_right.knee = moveServo(fore_right.knee, 60);
-  fore_right.knee = moveServo(fore_right.knee, 100);
+  moveServo(fore_right.knee, 100,60);
+  moveServo(fore_right.knee, 60,100);
 //  moveServo(back_left.joint, 60);
 //  moveServo(back_left.knee, 70);
 //  moveServo(back_left.joint, 120);
@@ -89,21 +74,21 @@ void walk(){
 
 //サーボをスピードを遅くして動かす関数
 //引数　ー　動かしたいサーボ、開始角度、終了角度
-Leg moveServo(Leg leg, int end_deg) {
-  if (leg.deg < end_deg) {
-    for (int deg = leg.deg; deg < end_deg; deg++) {
-      leg.servo.write(deg);
+void moveServo(Servo leg, int start_deg, int end_deg) {
+  if (start_deg < end_deg) {
+    for (int deg = start_deg; deg < end_deg; deg++) {
+      leg.write(deg);
       delay(t);
     }
-  } else if (leg.deg > end_deg) {
-    for (int deg = leg.deg; deg > end_deg; deg--) {
-      leg.servo.write(deg);
+  } else if (start_deg > end_deg) {
+    for (int deg = start_deg; deg > end_deg; deg--) {
+      leg.write(deg);
       delay(t);
     }
+  }else {
+    leg.write(start_deg);
   }
   delay(t);
-  leg.deg = end_deg;
-  return leg;
 }
 
 
