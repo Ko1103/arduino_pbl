@@ -1,5 +1,5 @@
 #include <Servo.h>
-#define t 10
+#define t 5
 #define echoPin 22
 #define trigPin 23
 
