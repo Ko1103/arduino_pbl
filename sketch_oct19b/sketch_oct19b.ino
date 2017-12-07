@@ -42,24 +42,25 @@ void setup() {
 
 void loop() {
   //初期状態
-  moveServo(fore_left.ankle, 100, 100); 
-  moveServo(fore_left.knee, 100, 100); 
+  moveServo(fore_left.ankle, 90, 90); 
+  moveServo(fore_left.knee, 120, 120); 
   moveServo(fore_left.joint, 100, 100);
-  moveServo(fore_right.ankle, 100, 100); //right ankle 150度でまっすぐになる
-  moveServo(fore_right.knee, 100,100); // right knee の初期値として足を下につかせる
+  moveServo(fore_right.ankle, 90, 90); //right ankle 150度でまっすぐになる
+  moveServo(fore_right.knee, 120,120); // right knee の初期値として足を下につかせる
   moveServo(fore_right.joint, 100,100); //right jointの初期値として正面を向かせる
   moveServo(back_right.knee, 100,100);
   moveServo(back_right.joint, 100,100);
   moveServo(back_left.knee, 100,100);
   moveServo(back_left.joint, 100,100);
-  walk();
+//  walk();
+  climb();
 }
 
 void walk(){
   moveServo(fore_left.knee, 100,60);
-  moveServo(fore_left.knee, 60,130);
+  moveServo(fore_left.knee, 60,120);
   moveServo(fore_right.knee, 100,60);
-  moveServo(fore_right.knee, 60, 100);
+  moveServo(fore_right.knee, 60, 120);
 
   moveServo(back_left.joint, 100, 80);
   moveServo(back_left.knee, 100, 30);
@@ -70,6 +71,30 @@ void walk(){
   moveServo(back_right.knee, 100, 150);
   moveServo(back_right.joint, 100, 60);
   moveServo(back_right.knee, 120, 100);
+  moveServo(back_right.joint, 60,100);
+}
+
+void climb(){
+  moveServo(fore_left.ankle, 100, 150);
+  moveServo(fore_left.knee, 100,30);
+  moveServo(fore_left.ankle, 150, 100);
+  moveServo(fore_left.knee, 30,100);
+
+  moveServo(fore_right.ankle, 100, 150);
+  moveServo(fore_right.knee, 100,30);
+  moveServo(fore_right.ankle, 150, 100);
+  moveServo(fore_right.knee, 30, 100);
+
+  moveServo(back_left.joint, 100, 80);
+  moveServo(back_left.knee, 100, 20);
+  moveServo(back_left.joint, 100, 140);
+  moveServo(back_left.knee, 20, 100);
+  moveServo(back_left.joint, 140,100);
+  
+  moveServo(back_right.joint, 100, 120);
+  moveServo(back_right.knee, 100, 160);
+  moveServo(back_right.joint, 100, 60);
+  moveServo(back_right.knee, 160, 100);
   moveServo(back_right.joint, 60,100);
 }
 
