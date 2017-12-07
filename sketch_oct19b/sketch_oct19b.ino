@@ -24,16 +24,16 @@ double Distance = 0;
 
 
 void setup() {
-  fore_right.ankle.attach(3);
-  fore_right.knee.attach(4);
-  fore_right.joint.attach(5);
-  fore_left.ankle.attach(6);
-  fore_left.knee.attach(7);
-  fore_left.joint.attach(8);
-  back_right.knee.attach(9);
-  back_right.joint.attach(10);
-  back_left.knee.attach(11);
-  back_left.joint.attach(12);
+  fore_left.ankle.attach(3);
+  fore_left.knee.attach(4);
+  fore_left.joint.attach(5);
+  fore_right.ankle.attach(6);
+  fore_right.knee.attach(7);
+  fore_right.joint.attach(8);
+  back_left.knee.attach(9);
+  back_left.joint.attach(10);
+  back_right.knee.attach(11);
+  back_right.joint.attach(12);
   
   Serial.begin(9600);
   pinMode(echoPin, INPUT);
@@ -52,24 +52,25 @@ void loop() {
   moveServo(back_right.joint, 100,100);
   moveServo(back_left.knee, 100,100);
   moveServo(back_left.joint, 100,100);
-//  walk();
+  walk();
 }
 
 void walk(){
+  moveServo(fore_left.knee, 100,60);
+  moveServo(fore_left.knee, 60,130);
   moveServo(fore_right.knee, 100,60);
-  moveServo(fore_right.knee, 60,100);
-//  moveServo(back_left.joint, 60);
-//  moveServo(back_left.knee, 70);
-//  moveServo(back_left.joint, 120);
-//  moveServo(back_left.knee, 120);
-//  moveServo(fore_right.knee, 120);
-//  moveServo(fore_left.knee, 90);
-//  moveServo(fore_left.knee, 150);
-//  moveServo(back_right.joint, 150);
-//  moveServo(back_right.knee, 120);
-//  moveServo(back_left.joint, 110);
-//  moveServo(back_right.joint, 120);
-//  moveServo(back_right.knee, 60);
+  moveServo(fore_right.knee, 60, 100);
+
+  moveServo(back_left.joint, 100, 80);
+  moveServo(back_left.knee, 100, 30);
+  moveServo(back_left.joint, 100, 140);
+  moveServo(back_left.knee, 30, 100);
+  moveServo(back_left.joint, 140,100);
+  moveServo(back_right.joint, 100, 120);
+  moveServo(back_right.knee, 100, 150);
+  moveServo(back_right.joint, 100, 60);
+  moveServo(back_right.knee, 120, 100);
+  moveServo(back_right.joint, 60,100);
 }
 
 //サーボをスピードを遅くして動かす関数
