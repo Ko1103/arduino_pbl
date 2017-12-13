@@ -63,7 +63,7 @@ void loop() {
 //    }
 //    turn(1);
 //  }
-  walk();
+  climb();
 }
 
 void walk(){
@@ -98,18 +98,18 @@ void climb(){
 
   moveServo(back_left.joint, 100, 60);
   moveServo(back_left.knee, 100, 30);
-  moveServo(back_left.joint, 60, 140);
+  moveServo(back_left.joint, 60, 110);
   moveServo(back_left.knee, 30, 100);
-  moveServo(back_left.joint, 140,100);
+  moveServo(back_left.joint, 110,100);
   
-  moveServo(fore_right.knee, 100,120);
-  moveServo(fore_left.knee, 100, 120);
+//  moveServo(fore_right.knee, 100,120);
+//  moveServo(fore_left.knee, 100, 120);
   
   moveServo(back_right.joint, 110, 140);
   moveServo(back_right.knee, 100, 150);
-  moveServo(back_right.joint, 140, 60);
+  moveServo(back_right.joint, 140, 90);
   moveServo(back_right.knee, 150, 100);
-  moveServo(back_right.joint, 60,110);
+  moveServo(back_right.joint, 90,110);
 }
 
 //90度回転するプログラム
