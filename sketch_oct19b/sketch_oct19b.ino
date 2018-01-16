@@ -29,7 +29,7 @@ int f_l_k_deg = 110;
 int f_l_j_deg = 90;
 int f_r_a_deg = 80;
 int f_r_k_deg = 120;
-int f_r_j_deg = 90;
+int f_r_j_deg = 120;
 int b_l_k_deg = 120;
 int b_l_j_deg = 120;
 int b_r_k_deg = 70;
@@ -114,7 +114,7 @@ void walk(){
   f_l_k_deg = moveServo2(back_left.knee, b_l_k_deg, -60);
   f_l_j_deg = moveServo2(back_left.joint, b_l_j_deg, 30);
   f_l_k_deg = moveServo2(back_left.knee, b_l_k_deg, 60);
-  f_l_j_deg = moveServo(back_left.joint, b_l_j_deg, -10);
+  f_l_j_deg = moveServo2(back_left.joint, b_l_j_deg, -10);
   
   f_r_j_deg = moveServo2(back_right.joint, f_r_j_deg, 20);
   f_r_k_deg = moveServo2(back_right.knee, f_r_k_deg, 40);
