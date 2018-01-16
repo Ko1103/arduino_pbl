@@ -26,10 +26,10 @@ int mode = 0; //歩行、悪路、旋回などの切り替え用の数値
 
 int f_l_a_deg = 80;
 int f_l_k_deg = 110;
-int f_l_j_deg = 105;
-int f_r_a_deg = 90;
+int f_l_j_deg = 90;
+int f_r_a_deg = 80;
 int f_r_k_deg = 120;
-int f_r_j_deg = 100;
+int f_r_j_deg = 90;
 int b_l_k_deg = 120;
 int b_l_j_deg = 120;
 int b_r_k_deg = 70;
@@ -58,7 +58,7 @@ void loop() {
   moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
   moveServo(fore_left.knee, f_l_k_deg, 110); 
   moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
-  moveServo(fore_right.ankle, f_r_a_deg, 90); //right ankle 150度でまっすぐになる
+  moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
   moveServo(fore_right.knee, f_r_k_deg,120); // right knee の初期値として足を下につかせる
   moveServo(fore_right.joint, f_r_j_deg,100); //right jointの初期値として正面を向かせる
   
@@ -105,22 +105,22 @@ void pushup(){
 
 
 void walk(){
-  moveServo(fore_right.knee, 100,60);
-  moveServo(fore_right.knee, 60, 120);
-  moveServo(fore_left.knee, 110,60);
-  moveServo(fore_left.knee, 60,110);
+  f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, -40);
+  f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, 40);
+  f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, -50);
+  f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 50);
 
-  moveServo(back_left.joint, 100, 80);
-  moveServo(back_left.knee, 100, 40);
-  moveServo(back_left.joint, 80, 110);
-  moveServo(back_left.knee, 40, 100);
-  moveServo(back_left.joint, 120,100);
+  f_l_j_deg = moveServo2(back_left.joint, b_l_j_deg, -20);
+  f_l_k_deg = moveServo2(back_left.knee, b_l_k_deg, -60);
+  f_l_j_deg = moveServo2(back_left.joint, b_l_j_deg, 30);
+  f_l_k_deg = moveServo2(back_left.knee, b_l_k_deg, 60);
+  f_l_j_deg = moveServo(back_left.joint, b_l_j_deg, -10);
   
-  moveServo(back_right.joint, 100, 120);
-  moveServo(back_right.knee, 90, 130);
-  moveServo(back_right.joint, 120, 80);
-  moveServo(back_right.knee, 130, 90);
-  moveServo(back_right.joint, 80,110);
+  f_r_j_deg = moveServo2(back_right.joint, f_r_j_deg, 20);
+  f_r_k_deg = moveServo2(back_right.knee, f_r_k_deg, 40);
+  f_r_j_deg = moveServo2(back_right.joint, f_r_j_deg, -40);
+  f_r_k_deg = moveServo2(back_right.knee, f_r_k_deg, -40);
+  f_r_j_deg = moveServo2(back_right.joint, f_r_j_deg, 20);
 }
 
 
@@ -130,7 +130,7 @@ void climb(){
   f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, -80); //110 -> 30
   f_l_a_deg = moveServo2(fore_left.ankle, f_l_a_deg, -80);
   f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 80);
-//
+  
   f_r_a_deg = moveServo2(fore_right.ankle, f_r_a_deg, 70);
   f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg,-70);
   f_r_a_deg = moveServo2(fore_right.ankle, f_r_a_deg, -70);
@@ -145,7 +145,6 @@ void climb(){
   b_r_k_deg = moveServo2(back_right.knee, b_r_k_deg, 80);
   b_r_j_deg = moveServo2(back_right.joint, b_r_j_deg, -60);
   b_r_k_deg = moveServo2(back_right.knee, b_r_k_deg, -80);
-//  b_r_j_deg = moveServo2(back_right.joint, b_r_j_deg, 20);
 }
 
 
