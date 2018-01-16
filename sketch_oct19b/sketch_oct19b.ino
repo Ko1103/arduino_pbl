@@ -56,16 +56,16 @@ void loop() {
 //  初期状態
   mode = check_distance();
   moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
-  moveServo(fore_left.knee, f_l_k_deg, 110); 
+  moveServo(fore_left.knee, f_l_k_deg, f_l_k_deg); 
   moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
   moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
-  moveServo(fore_right.knee, f_r_k_deg,120); // right knee の初期値として足を下につかせる
-  moveServo(fore_right.joint, f_r_j_deg,100); //right jointの初期値として正面を向かせる
+  moveServo(fore_right.knee, f_r_k_deg, f_r_k_deg); // right knee の初期値として足を下につかせる
+  moveServo(fore_right.joint, f_r_j_deg, f_r_j_deg); //right jointの初期値として正面を向かせる
   
-  moveServo(back_right.knee, b_r_k_deg,70);
-  moveServo(back_right.joint, b_r_j_deg,90);
-  moveServo(back_left.knee, b_l_k_deg,120);
-  moveServo(back_left.joint, b_l_j_deg,120);
+  moveServo(back_right.knee, b_r_k_deg, b_r_k_deg);
+  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
+  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
+  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
   
   //歩行
 //  walk();
