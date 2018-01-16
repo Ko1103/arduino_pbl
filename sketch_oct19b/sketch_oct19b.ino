@@ -54,23 +54,23 @@ void setup() {
 
 void loop() {
 //  初期状態
-  mode = check_distance();
-  moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
-  moveServo(fore_left.knee, f_l_k_deg, f_l_k_deg); 
-  moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
-  moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
-  moveServo(fore_right.knee, f_r_k_deg, f_r_k_deg); // right knee の初期値として足を下につかせる
-  moveServo(fore_right.joint, f_r_j_deg, f_r_j_deg); //right jointの初期値として正面を向かせる
-  
-  moveServo(back_right.knee, b_r_k_deg, b_r_k_deg);
-  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
-  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
-  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
-  
+//  mode = check_distance();
+//  moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
+//  moveServo(fore_left.knee, f_l_k_deg, f_l_k_deg); 
+//  moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
+//  moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
+//  moveServo(fore_right.knee, f_r_k_deg, f_r_k_deg); // right knee の初期値として足を下につかせる
+//  moveServo(fore_right.joint, f_r_j_deg, f_r_j_deg); //right jointの初期値として正面を向かせる
+//  
+//  moveServo(back_right.knee, b_r_k_deg, b_r_k_deg);
+//  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
+//  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
+//  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
+  pk();
   //歩行
 //  walk();
   //悪路
-  climb();
+//  climb();
 
   //回避
 //  if(mode == 0){
@@ -147,7 +147,13 @@ void climb(){
   b_r_k_deg = moveServo2(back_right.knee, b_r_k_deg, -80);
 }
 
-
+void pk(){
+  back_right.knee.write(120);
+  back_right.joint.write(120);
+  back_left.knee.write(120);
+  back_left.joint.write(60);
+  delay(1000);
+}
 //90度回転するプログラム
 void turn(int direct){
   if (direct == 0){
