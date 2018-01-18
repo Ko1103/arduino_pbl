@@ -1,9 +1,13 @@
+
 void comeback(){
   //動く　
   do {
-    moveServo(fore_right.knee, f_r_k_deg, 120);
-    moveServo(fore_left.knee, f_l_k_deg, 120);
-    
+    moveServo(fore_right.knee, 120, 120);
+//    moveServo(fore_right.knee, 120, 60);
+    moveServo(fore_left.knee, 120, 120);
+    moveServo(fore_left.knee, 120, 60);
+    moveServo(back_right.joint, 120, 120);
+    moveServo(back_right.joint, 120, 120);
   }while(checkfall(360) == false);
   Serial.println("復帰プログラム終了");
 }
