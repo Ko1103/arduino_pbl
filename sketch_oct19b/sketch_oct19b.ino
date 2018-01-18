@@ -66,12 +66,16 @@ void loop() {
 //  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
 //  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
 //  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
-  pk();
   //歩行
 //  walk();
   //悪路
-//  climb();
-
+  
+  climb();
+  if (checkfall(270) == true ){
+    Serial.println("転倒プログラム開始");
+    comeback();
+  }
+  
   //回避
 //  if(mode == 0){
 //    walk();
@@ -147,13 +151,18 @@ void climb(){
   b_r_k_deg = moveServo2(back_right.knee, b_r_k_deg, -80);
 }
 
-void pk(){
-  back_right.knee.write(120);
-  back_right.joint.write(120);
-  back_left.knee.write(120);
-  back_left.joint.write(60);
-  delay(1000);
+
+void comeback(){
+  //動く　
+  do {
+    moveServo(fore_right.knee, f_r_k_deg, 120);
+    moveServo(fore_left.knee, f_l_k_deg, 120);
+    
+  }while(checkfall(360) == false);
+  Serial.println("復帰プログラム終了");
 }
+
+
 //90度回転するプログラム
 void turn(int direct){
   if (direct == 0){
@@ -306,3 +315,45 @@ void move_double(Servo servo_1, int start_deg_1, int end_deg_1, Servo servo_2, i
     }
   }
 } 
+
+
+//転倒しているかどうかをチェックする関数
+//転倒したかどうかは270、正常に歩いているかどうかは360を基準にとっている
+//転倒していれば trueを返す
+bool checkfall(long border){
+  bool check = false;
+  
+  uint8_t i;
+  long x = 0;
+  long y = 0;
+  long z = 0;
+
+  for (i=0; i<100; i++){
+    x = x + analogRead(0);
+    y = y + analogRead(1);
+    z = z + analogRead(2);
+  }
+
+  x = x / 100;
+  y = y / 100;
+  z = z / 100;
+
+  Serial.print("X: ");
+  Serial.print(x);
+  Serial.print(" Y:");
+  Serial.print(y);
+  Serial.print(" Z:");
+  Serial.println(z);
+
+  delay(1000); 
+  if (border > 300) {
+    Serial.println("状態を確認");
+    if (y > border) {
+      check = true;
+    }
+  }else if (y < border ){
+    Serial.println("転倒しました。");
+    check = true;
+  }
+  return check;
+}
