@@ -8,10 +8,10 @@ void avoid(){
   }else if(mode == 1){
     delay(2000);
     turn(0);
-    for(int i=0;i<4;i++){
+    for(int i=0;i<15;i++){
       walk();
     }
-    turn(1);
+//    turn(1);
   }
 }
 
@@ -19,7 +19,8 @@ void avoid(){
 //90度回転するプログラム
 void turn(int direct){
   if (direct == 0){
-    for(int i=0;i<8;i++){
+    twincle(1);
+    for(int i=0;i<4;i++){
       //時計回りに回転
       moveServo(fore_right.knee,120, 60);
       moveServo(fore_right.joint,100, 140);
@@ -39,19 +40,21 @@ void turn(int direct){
     
   }else{
     //反時計回りに回転
+    twincle(2);
     for(int i=0;i<8;i++){
       //時計回りに回転
+      fall();
       f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, -60);
       f_l_j_deg = moveServo2(fore_left.joint, f_l_j_deg, -40);
-      f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 40);
+      f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 50);
       f_l_j_deg = moveServo2(fore_left.joint, f_l_j_deg, 40);
       delay(200);
-      f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, -60);
+      f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, -40);
       f_r_j_deg = moveServo2(fore_right.joint, f_r_j_deg, -40);
-      f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, 60);
+      f_r_k_deg = moveServo2(fore_right.knee, f_r_k_deg, 40);
       f_r_j_deg = moveServo2(fore_right.joint, f_r_j_deg, 40);
       delay(200);
-      f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 20);
+      f_l_k_deg = moveServo2(fore_left.knee, f_l_k_deg, 10);
 //      moveServo(back_left.joint, 100, 140);
 //      moveServo(back_left.joint, 140, 100);
 //      moveServo(back_right.joint, 100, 60);

@@ -33,7 +33,7 @@ void stop_ball(){
   delay(50);
   fore_left.joint.write(30);//開く
   fore_right.joint.write(150);
-  delay(1000);
+  delay(2000);
   moveServo(fore_left.joint, 70, 70);
   moveServo(fore_right.joint, 110, 110);
   
