@@ -50,7 +50,6 @@ void loop() {
   pk();
 }
 
-
 void pk(){
   int mode = 0;
   if (mode == 0){
@@ -62,9 +61,10 @@ void pk(){
     fore_left.joint.write(30);//開く
     fore_right.joint.write(150);
     delay(1000);
-    fore_right.joint.write(100);
     fore_left.joint.write(100);
+    fore_right.joint.write(100);
   }else {
     
   }
+
 }

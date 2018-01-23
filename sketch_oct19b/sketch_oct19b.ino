@@ -29,7 +29,7 @@ int f_l_k_deg = 110;
 int f_l_j_deg = 90;
 int f_r_a_deg = 80;
 int f_r_k_deg = 120;
-int f_r_j_deg = 120;
+int f_r_j_deg = 110;
 int b_l_k_deg = 120;
 int b_l_j_deg = 120;
 int b_r_k_deg = 70;
@@ -54,62 +54,24 @@ void setup() {
 
 void loop() {
 //  初期状態
-//  mode = check_distance();
-//  moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
-//  moveServo(fore_left.knee, f_l_k_deg, f_l_k_deg); 
-//  moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
-//  moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
-//  moveServo(fore_right.knee, f_r_k_deg, f_r_k_deg); // right knee の初期値として足を下につかせる
-//  moveServo(fore_right.joint, f_r_j_deg, f_r_j_deg); //right jointの初期値として正面を向かせる
-//  
-//  moveServo(back_right.knee, b_r_k_deg, b_r_k_deg);
-//  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
-//  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
-//  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
+  mode = check_distance();
+  moveServo(fore_left.ankle, f_l_a_deg, f_l_a_deg); 
+  moveServo(fore_left.knee, f_l_k_deg, f_l_k_deg); 
+  moveServo(fore_left.joint, f_l_j_deg, f_l_j_deg);
+  moveServo(fore_right.ankle, f_r_a_deg, f_r_a_deg); //right ankle 150度でまっすぐになる
+  moveServo(fore_right.knee, f_r_k_deg, f_r_k_deg); // right knee の初期値として足を下につかせる
+  moveServo(fore_right.joint, f_r_j_deg, f_r_j_deg); //right jointの初期値として正面を向かせる
+  
+  moveServo(back_right.knee, b_r_k_deg, b_r_k_deg);
+  moveServo(back_right.joint, b_r_j_deg, b_r_j_deg);
+  moveServo(back_left.knee, b_l_k_deg, b_l_k_deg);
+  moveServo(back_left.joint, b_l_j_deg, b_l_j_deg);
   //歩行
 //  walk();
   //悪路
-  
-  climb();
-  if (checkfall(270) == true ){
-    Serial.println("転倒プログラム開始");
-    comeback();
-  }
-  
-  //回避
-//  if(mode == 0){
-//    walk();
-//  }else if(mode == 1){
-//    delay(2000);
-//    turn(0);
-//    for(int i=0;i<5;i++){
-//      walk();
-//    }
-//    turn(1);
-//  }
 //  climb();
-//  pushup();
+//  avoid();
+//  fall();
+  pk();
 }
-
-
-void pushup(){
-  moveServo(fore_left.ankle, 90, 90); 
-  moveServo(fore_left.knee, 120, 120); 
-  moveServo(fore_left.joint, 30, 30);
-  moveServo(fore_right.ankle, 90, 90); //right ankle 150度でまっすぐになる
-  moveServo(fore_right.knee, 120,120); // right knee の初期値として足を下につかせる
-  moveServo(fore_right.joint, 150,150); //right jointの初期値として正面を向かせる
-  moveServo(back_right.knee, 90,90);
-  moveServo(back_right.joint, 110,110);
-  moveServo(back_left.knee, 100,100);
-  moveServo(back_left.joint, 100,100);
-  move_double(fore_left.knee, 120, 90, fore_right.knee, 120, 90);
-  move_double(fore_left.knee, 90, 120, fore_right.knee, 90, 120);
-}
-
-
-
-
-
-
 

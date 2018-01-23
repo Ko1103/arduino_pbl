@@ -1,15 +1,26 @@
 
+void fall(){
+  if (checkfall(270) == true ){
+    Serial.println("転倒プログラム開始");
+    comeback();
+  }
+}
+
+
+
 void comeback(){
   //動く　
   do {
-    moveServo(fore_right.knee, 120, 120);
+    moveServo(fore_right.knee, 60, 60);
 //    moveServo(fore_right.knee, 120, 60);
     moveServo(fore_left.knee, 120, 120);
-    moveServo(fore_left.knee, 120, 60);
-    moveServo(back_right.joint, 120, 120);
+//    moveServo(fore_left.knee, 120, 60);
+    moveServo(back_right.joint, 100, 100);
     moveServo(back_right.joint, 120, 120);
   }while(checkfall(360) == false);
   Serial.println("復帰プログラム終了");
+  moveServo(fore_right.knee, 60, 120);
+  moveServo(back_right.joint, 100, 120);
 }
 
 
